@@ -1,0 +1,7 @@
+pytest>=8.0
+
+# Optional, only required for tests/test_langchain_tool_wrapper.py and
+# src/langchain_tool_wrapper.py -- the core project (user_profile.py,
+# situation_model.py, recommendation_engine.py, recommendation_tool.py)
+# has no dependency on this and its tests pass without it installed.
+# langchain-core>=0.3,<0.4
