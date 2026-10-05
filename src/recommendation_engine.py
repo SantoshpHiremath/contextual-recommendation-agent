@@ -3,16 +3,15 @@ recommendation_engine.py
 --------------------------
 
 Combines a UserProfile and a Situation into a ranked list of
-recommended assistant actions -- the "Empfehlungssysteme"
-(recommendation systems) piece of the BMW posting this project
-targets, and the point where user profiles and situation models
-actually get used together, not just computed and left unconnected.
+recommended assistant actions -- the recommendation-system piece, and
+the point where user profiles and situation models actually get used
+together, not just computed and left unconnected.
 
 The scoring is a real, inspectable rule-based combination (situation
 gating + profile-weighted ranking within the gated set) rather than a
-trained ranking model -- an honest, disclosed design choice for a
-from-scratch demo project with no real interaction-log data at the
-scale a learned ranker would need. See the module's honest scope note.
+trained ranking model -- a design choice suited to a from-scratch
+project with synthetic data; a learned ranker would need interaction
+logs at larger scale.
 """
 from __future__ import annotations
 
@@ -64,7 +63,7 @@ def _situational_relevance(category: str, situation: Situation) -> tuple:
         # No strong situational signal modeled for climate in this
         # project (would need real external temperature data, which
         # isn't part of this project's synthetic inputs) -- eligible
-        # with a neutral boost, honestly.
+        # with a neutral boost.
         return True, 0.0, "no strong situational signal for climate in this model"
 
     if category == "calendar_reminder":

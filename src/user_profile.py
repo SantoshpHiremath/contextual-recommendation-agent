@@ -3,17 +3,14 @@ user_profile.py
 -----------------
 
 Builds and maintains a per-user preference profile from interaction
-history -- the "Nutzerprofile" (user profiles) piece named directly in
-the BMW posting this project targets (Praktikant Agentic AI und
-kontextsensitive Systeme, Job ID 190640): "eigene Ideen zur
-Weiterentwicklung datenbasierter Methoden für Nutzerprofile,
-Situationsmodelle und Empfehlungssysteme."
+history -- the user-profile piece of the context-sensitive recommendation
+system (user profiles, situation models, recommendation systems).
 
 A profile is a real, computed preference distribution over action
 categories (not a hand-set default), derived from that user's own past
 accepted/rejected suggestions, with exponential recency weighting so
 recent behavior matters more than old behavior -- a genuine, if simple,
-modeling choice with a real, disclosed rationale rather than a plain
+modeling choice with a clear rationale rather than a plain
 average.
 """
 from __future__ import annotations
@@ -93,7 +90,7 @@ def cold_start_profile(user_id: str) -> UserProfile:
     """A user with no interaction history yet gets an explicitly empty
     profile (no category_scores at all), not a fabricated "average
     user" guess -- callers (the recommendation engine) must handle this
-    honestly, e.g. by falling back to population-level popularity
+    explicitly, e.g. by falling back to population-level popularity
     rather than pretending to know an individual's preference. This
     function exists so that fallback is a deliberate, tested code path,
     not an accidental one.

@@ -65,7 +65,7 @@ def _contextual_recommendations_impl(
 if LANGCHAIN_AVAILABLE:
     contextual_recommendations_tool = _langchain_tool(_contextual_recommendations_impl)
 else:
-    # Honest fallback: calling code that checks LANGCHAIN_AVAILABLE
+    # Fallback: calling code that checks LANGCHAIN_AVAILABLE
     # before use will never reach this, but leaving a plain-callable
     # stand-in (rather than None) means an accidental import doesn't
     # crash at import time, only at call time with a clear error.

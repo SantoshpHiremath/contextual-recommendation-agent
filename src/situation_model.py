@@ -3,14 +3,12 @@ situation_model.py
 --------------------
 
 Encodes the current driving/trip context into a structured "situation"
--- the "Situationsmodelle" (situation models) piece named in the BMW
-posting. A situation is not a black-box embedding here; it's an
+-- the situation-model piece. A situation is not a black-box embedding here; it's an
 explicit, inspectable set of derived context features (time-of-day
 bucket, trip-type guess, battery-state urgency, occupancy), each
 computed by a real, testable rule from raw sensor/context inputs -- an
-honest, interpretable design choice for a portfolio project (a
-production system might use a learned embedding instead, see the
-module's honest scope note below).
+interpretable design choice (a learned embedding is a possible
+extension, see the scope note below).
 """
 from __future__ import annotations
 
@@ -36,15 +34,13 @@ def _time_of_day_bucket(hour: int) -> str:
 
 
 def _infer_trip_type(distance_km: float, time_bucket: str, is_familiar_route: bool) -> str:
-    """A simple, disclosed heuristic (not a trained classifier): a
+    """A simple heuristic (not a trained classifier): a
     short, familiar route during a commute time bucket is inferred as
     a commute; a short route outside commute hours is an errand; a
     long route is long_distance regardless of time; anything else is
-    unknown rather than a forced guess. HONEST SCOPE NOTE: a production
-    system would likely learn this from historical route data per user
-    rather than a fixed rule -- this is a real, working, but simpler
-    starting point, disclosed as such rather than presented as a
-    trained model.
+    unknown rather than a forced guess. SCOPE NOTE: learning this from
+    historical route data per user is a natural extension; the fixed
+    rule here is a simple, working starting point.
     """
     if distance_km > 80:
         return "long_distance"
